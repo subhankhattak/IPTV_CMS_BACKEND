@@ -41,10 +41,14 @@ export class SubCategory {
   @DeleteDateColumn({ nullable: true })
   deleted_at?: Date;
 
-  @CreateDateColumn({ default: () => "CURRENT_TIMESTAMP" })
+  @CreateDateColumn({
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
+  })
   created_at: Date;
 
   @UpdateDateColumn({
+    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
     onUpdate: "CURRENT_TIMESTAMP",
   })

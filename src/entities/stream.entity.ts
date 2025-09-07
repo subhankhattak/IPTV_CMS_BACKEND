@@ -144,17 +144,19 @@ export class Stream {
   status: StreamStatus;
 
   @ApiProperty({ description: "Creation timestamp" })
-  @CreateDateColumn({ 
+  @CreateDateColumn({
     name: "created_at",
-    default: () => "CURRENT_TIMESTAMP"
+    type: "timestamp",
+    default: () => "CURRENT_TIMESTAMP",
   })
   created_at: Date;
 
   @ApiProperty({ description: "Last update timestamp" })
-  @UpdateDateColumn({ 
+  @UpdateDateColumn({
     name: "updated_at",
+    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
-    onUpdate: "CURRENT_TIMESTAMP"
+    onUpdate: "CURRENT_TIMESTAMP",
   })
   updated_at: Date;
 
