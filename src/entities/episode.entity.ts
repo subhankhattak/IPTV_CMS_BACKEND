@@ -155,11 +155,18 @@ export class Episode {
   season_id: string;
 
   @ApiProperty({ description: "Creation timestamp" })
-  @CreateDateColumn({ name: "created_at" })
+  @CreateDateColumn({ 
+    name: "created_at",
+    default: () => "CURRENT_TIMESTAMP"
+  })
   created_at: Date;
 
   @ApiProperty({ description: "Last update timestamp" })
-  @UpdateDateColumn({ name: "updated_at" })
+  @UpdateDateColumn({ 
+    name: "updated_at",
+    default: () => "CURRENT_TIMESTAMP",
+    onUpdate: "CURRENT_TIMESTAMP"
+  })
   updated_at: Date;
 
   @ApiProperty({ description: "Soft delete timestamp", required: false })

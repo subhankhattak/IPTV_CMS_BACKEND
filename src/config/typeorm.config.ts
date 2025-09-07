@@ -14,6 +14,12 @@ export const typeOrmConfig = {
   migrationsRun: false,
   synchronize: true,
   logging: false,
+  timezone: "Z", // Use UTC timezone
+  extra: {
+    // MySQL specific options to handle timestamp columns properly
+    charset: "utf8mb4",
+    timezone: "Z",
+  },
 };
 
 export default registerAs("typeorm", () => typeOrmConfig);

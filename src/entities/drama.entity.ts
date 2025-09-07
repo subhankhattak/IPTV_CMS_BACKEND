@@ -233,11 +233,18 @@ export class Drama {
   resolution: DramaResolution;
 
   @ApiProperty({ description: "Creation timestamp" })
-  @CreateDateColumn({ name: "added_at" })
+  @CreateDateColumn({ 
+    name: "added_at",
+    default: () => "CURRENT_TIMESTAMP"
+  })
   added_at: Date;
 
   @ApiProperty({ description: "Last update timestamp" })
-  @UpdateDateColumn({ name: "updated_at" })
+  @UpdateDateColumn({ 
+    name: "updated_at",
+    default: () => "CURRENT_TIMESTAMP",
+    onUpdate: "CURRENT_TIMESTAMP"
+  })
   updated_at: Date;
 
   @ApiProperty({ description: "Soft delete timestamp", required: false })
