@@ -93,11 +93,14 @@ async function bootstrap() {
       persistAuthorization: true,
     },
     customSiteTitle: "IPTV Backend API Documentation",
+    customCssUrl: '/api-docs/swagger-ui.css',
+    customJs: '/api-docs/swagger-ui-bundle.js',
+    customfavIcon: '/api-docs/favicon-32x32.png',
   });
 
   app.use(json({ limit: "50mb" }));
 
-  await app.listen(process.env.PORT, () => {
+  await app.listen(process.env.PORT, '0.0.0.0', () => {
     logger.log(`Server is running on port ${process.env.PORT}`);
   });
   logger.log(`Worker ${process.pid} started on port ${process.env.PORT}`);
