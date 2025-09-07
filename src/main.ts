@@ -16,6 +16,26 @@ async function bootstrap() {
     cors: true, // Enables default CORS settings
   });
 
+  //enable cors for all origins
+  app.enableCors({
+    origin: "*", // Allow all origins
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
+    allowedHeaders: [
+      "Content-Type",
+      "Authorization",
+      "X-Requested-With",
+      "Accept",
+      "Origin",
+      "Referer",
+      "User-Agent",
+      "Cache-Control",
+      "Pragma",
+    ],
+    credentials: false,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
+
   //Redis Socket Adapter
   // const redisAdapter = new RedisIoAdapter(app);
   // await redisAdapter.connectToRedis();
@@ -73,24 +93,6 @@ async function bootstrap() {
       persistAuthorization: true,
     },
     customSiteTitle: "IPTV Backend API Documentation",
-  });
-
-  //enable cors
-  app.enableCors({
-    origin: true, // Allow all origins for development
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "X-Requested-With",
-      "Accept",
-      "Origin",
-      "Referer",
-      "User-Agent",
-    ],
-    credentials: false,
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
   });
 
   app.use(json({ limit: "50mb" }));
