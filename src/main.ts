@@ -66,36 +66,32 @@ async function bootstrap() {
 
   //Swagger configuration
   const swaggerConfig = new DocumentBuilder()
-    .setTitle("IPTV Backend API Documentation")
+    .setTitle('IPTV Backend API Documentation')
     .setDescription(
-      "API documentation for the IPTV platform: applications, categories, sub-categories, bouquets, auth, and users."
+      'API documentation for the IPTV platform: applications, categories, sub-categories, bouquets, auth, and users.',
     )
     .addBearerAuth()
+    .addServer(`http://localhost:${process.env.PORT}`, 'Local Environment (localhost)')
+    .addServer(`http://127.0.0.1:${process.env.PORT}`, 'Local Environment (127.0.0.1)')
+    .addServer(`http://128.199.60.154:${process.env.PORT}`, 'Production Server (128.199.60.154)')
+    // Note: In a Node.js backend (like NestJS), you cannot directly extract the browser's URL.
+    // However, you can document how to extract the URL from a request if needed.
+    // For Swagger UI, you can add a server entry that uses the browser's current location via a script.
+    // This will make Swagger UI use the current browser URL as a server option.
     .addServer(
-      `http://localhost:${process.env.PORT}`,
-      "Local Environment (localhost)"
+      '{{window.location.protocol}}//{{window.location.host}}',
+      'Current Server (Auto Detected)',
     )
-    .addServer(
-      `http://127.0.0.1:${process.env.PORT}`,
-      "Local Environment (127.0.0.1)"
-    )
-    .addServer(
-      `http://128.199.60.154:${process.env.PORT}`,
-      "Production Server (128.199.60.154)"
-    )
-    .setVersion("1.0")
+    .setVersion('1.0')
     .build();
 
   //Instantiate Swagger document
   const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup("api-docs", app, document, {
+  SwaggerModule.setup('swagger', app, document, {
     swaggerOptions: {
       persistAuthorization: true,
     },
-    customSiteTitle: "IPTV Backend API Documentation",
-    customCssUrl: '/api-docs/swagger-ui.css',
-    customJs: '/api-docs/swagger-ui-bundle.js',
-    customfavIcon: '/api-docs/favicon-32x32.png',
+    customSiteTitle: 'IPTV Backend API Documentation',
   });
 
   app.use(json({ limit: "50mb" }));
