@@ -51,11 +51,7 @@ export class BouquetMergeLog {
   action: MergeAction;
 
   @ApiProperty({ description: "Creation timestamp" })
-  @CreateDateColumn({
-    name: "created_at",
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP",
-  })
+  @CreateDateColumn({ name: "created_at", type: "datetime" })
   created_at: Date;
 
   // Relationships

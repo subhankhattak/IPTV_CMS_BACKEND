@@ -201,22 +201,13 @@ export class Radio {
   @ApiProperty({
     description: "Creation timestamp",
   })
-  @CreateDateColumn({
-    name: "added_at",
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP",
-  })
+  @CreateDateColumn({ name: "added_at", type: "datetime" })
   added_at: Date;
 
   @ApiProperty({
     description: "Last update timestamp",
   })
-  @UpdateDateColumn({
-    name: "updated_at",
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP",
-    onUpdate: "CURRENT_TIMESTAMP",
-  })
+  @UpdateDateColumn({ name: "updated_at", type: "datetime" })
   updated_at: Date;
 
   @ApiProperty({

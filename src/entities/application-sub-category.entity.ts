@@ -34,17 +34,10 @@ export class ApplicationSubCategory {
   @DeleteDateColumn({ nullable: true })
   deleted_at?: Date;
 
-  @CreateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP",
-  })
+  @CreateDateColumn({ type: "datetime" })
   created_at: Date;
 
-  @UpdateDateColumn({
-    type: "timestamp",
-    default: () => "CURRENT_TIMESTAMP",
-    onUpdate: "CURRENT_TIMESTAMP",
-  })
+  @UpdateDateColumn({ type: "datetime" })
   updated_at: Date;
 
   // Relationships
