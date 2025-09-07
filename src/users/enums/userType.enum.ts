@@ -1,0 +1,7 @@
+export enum UserTypeEnum {
+  SUPER_ADMIN = "SUPER_ADMIN",
+  ADMIN = "ADMIN",
+  RESELLER = "RESELLER",
+  SUB_RESELLER = "SUB_RESELLER",
+  USER = "USER",
+}

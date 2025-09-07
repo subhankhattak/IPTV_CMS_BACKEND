@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="2000" height="2000" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .entity-box {
+        fill: #f8f9fa;
+        stroke: #495057;
+        stroke-width: 2;
+        rx: 8;
+        ry: 8;
+      }
+      .entity-title {
+        fill: #212529;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        text-anchor: middle;
+      }
+      .attribute {
+        fill: #495057;
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        text-anchor: start;
+      }
+      .pk {
+        font-weight: bold;
+        fill: #dc3545;
+      }
+      .fk {
+        font-style: italic;
+        fill: #0d6efd;
+      }
+      .relationship-line {
+        stroke: #6c757d;
+        stroke-width: 2.5;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+      .relationship-label {
+        fill: #495057;
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+      }
+      .many-to-many {
+        stroke-dasharray: 8,4;
+      }
+      .section-title {
+        fill: #212529;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        text-anchor: middle;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="12" markerHeight="8" refX="11" refY="4" orient="auto">
+      <polygon points="0 0, 12 4, 0 8" fill="#6c757d" />
+    </marker>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="2000" height="2000" fill="#ffffff"/>
+  
+  <!-- Main Title -->
+  <text x="1000" y="40" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#212529">IPTV Backend Database ER Diagram - Complete Schema</text>
+  
+  <!-- Section 1: User Management -->
+  <text x="300" y="80" class="section-title">User Management</text>
+  
+  <!-- Users Entity -->
+  <rect x="50" y="100" width="220" height="200" class="entity-box"/>
+  <text x="160" y="125" class="entity-title">users</text>
+  <text x="70" y="150" class="attribute pk">id (PK) - UUID</text>
+  <text x="70" y="170" class="attribute">user_name - VARCHAR</text>
+  <text x="70" y="190" class="attribute">phone_number - VARCHAR (UNIQUE)</text>
+  <text x="70" y="210" class="attribute">email - VARCHAR (UNIQUE)</text>
+  <text x="70" y="230" class="attribute">password - VARCHAR</text>
+  <text x="70" y="250" class="attribute">user_type - ENUM</text>
+  <text x="70" y="270" class="attribute">active - BOOLEAN</text>
+  <text x="70" y="290" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="70" y="310" class="attribute">created_at - TIMESTAMP</text>
+  <text x="70" y="330" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Applications Entity -->
+  <rect x="350" y="100" width="220" height="200" class="entity-box"/>
+  <text x="460" y="125" class="entity-title">applications</text>
+  <text x="370" y="150" class="attribute pk">id (PK) - UUID</text>
+  <text x="370" y="170" class="attribute">name - VARCHAR (UNIQUE)</text>
+  <text x="370" y="190" class="attribute">logo_path - VARCHAR</text>
+  <text x="370" y="210" class="attribute">user_agent - VARCHAR</text>
+  <text x="370" y="230" class="attribute">description - TEXT</text>
+  <text x="370" y="250" class="attribute">theme - VARCHAR</text>
+  <text x="370" y="270" class="attribute">color_scheme - VARCHAR</text>
+  <text x="370" y="290" class="attribute">status - BOOLEAN</text>
+  <text x="370" y="310" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="370" y="330" class="attribute">created_at - TIMESTAMP</text>
+  <text x="370" y="350" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Application Assignments Entity -->
+  <rect x="650" y="100" width="220" height="200" class="entity-box"/>
+  <text x="760" y="125" class="entity-title">application_assignments</text>
+  <text x="670" y="150" class="attribute pk">id (PK) - UUID</text>
+  <text x="670" y="170" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="670" y="190" class="attribute fk">reseller_id (FK) - UUID</text>
+  <text x="670" y="210" class="attribute">assignment_type - ENUM</text>
+  <text x="670" y="230" class="attribute">price - DECIMAL(10,2)</text>
+  <text x="670" y="250" class="attribute">theme_variant - VARCHAR</text>
+  <text x="670" y="270" class="attribute">status - BOOLEAN</text>
+  <text x="670" y="290" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="670" y="310" class="attribute">created_at - TIMESTAMP</text>
+  <text x="670" y="330" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Section 2: Content Organization -->
+  <text x="1100" y="80" class="section-title">Content Organization</text>
+  
+  <!-- Categories Entity -->
+  <rect x="950" y="100" width="220" height="200" class="entity-box"/>
+  <text x="1060" y="125" class="entity-title">categories</text>
+  <text x="970" y="150" class="attribute pk">id (PK) - UUID</text>
+  <text x="970" y="170" class="attribute">original_name - VARCHAR</text>
+  <text x="970" y="190" class="attribute">use_for - SET</text>
+  <text x="970" y="210" class="attribute">show_name_on_application - VARCHAR</text>
+  <text x="970" y="230" class="attribute">thumbnail - VARCHAR</text>
+  <text x="970" y="250" class="attribute">order - INT</text>
+  <text x="970" y="270" class="attribute">status - BOOLEAN</text>
+  <text x="970" y="290" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="970" y="310" class="attribute">created_at - TIMESTAMP</text>
+  <text x="970" y="330" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Sub Categories Entity -->
+  <rect x="1250" y="100" width="220" height="200" class="entity-box"/>
+  <text x="1360" y="125" class="entity-title">sub_categories</text>
+  <text x="1270" y="150" class="attribute pk">id (PK) - UUID</text>
+  <text x="1270" y="170" class="attribute">original_name - VARCHAR</text>
+  <text x="1270" y="190" class="attribute fk">category_id (FK) - UUID</text>
+  <text x="1270" y="210" class="attribute">show_name_on_application - VARCHAR</text>
+  <text x="1270" y="230" class="attribute">description - TEXT</text>
+  <text x="1270" y="250" class="attribute">thumbnail - VARCHAR</text>
+  <text x="1270" y="270" class="attribute">order - INT</text>
+  <text x="1270" y="290" class="attribute">status - BOOLEAN</text>
+  <text x="1270" y="310" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="1270" y="330" class="attribute">created_at - TIMESTAMP</text>
+  <text x="1270" y="350" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Application Categories Entity -->
+  <rect x="1550" y="100" width="220" height="200" class="entity-box"/>
+  <text x="1660" y="125" class="entity-title">application_categories</text>
+  <text x="1570" y="150" class="attribute pk">id (PK) - UUID</text>
+  <text x="1570" y="170" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="1570" y="190" class="attribute fk">category_id (FK) - UUID</text>
+  <text x="1570" y="210" class="attribute">alias - VARCHAR</text>
+  <text x="1570" y="230" class="attribute">order - INT</text>
+  <text x="1570" y="250" class="attribute">status - BOOLEAN</text>
+  <text x="1570" y="270" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="1570" y="290" class="attribute">created_at - TIMESTAMP</text>
+  <text x="1570" y="310" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Section 3: Video Content -->
+  <text x="300" y="380" class="section-title">Video Content</text>
+  
+  <!-- Movies Entity -->
+  <rect x="50" y="400" width="220" height="280" class="entity-box"/>
+  <text x="160" y="425" class="entity-title">movies</text>
+  <text x="70" y="450" class="attribute pk">id (PK) - UUID</text>
+  <text x="70" y="470" class="attribute">original_name - VARCHAR(255)</text>
+  <text x="70" y="490" class="attribute">show_app_name - VARCHAR(255)</text>
+  <text x="70" y="510" class="attribute">description - TEXT</text>
+  <text x="70" y="530" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="70" y="550" class="attribute">genres - TEXT</text>
+  <text x="70" y="570" class="attribute">cast - TEXT</text>
+  <text x="70" y="590" class="attribute">director - VARCHAR(255)</text>
+  <text x="70" y="610" class="attribute">release_date - DATE</text>
+  <text x="70" y="630" class="attribute">language - VARCHAR(100)</text>
+  <text x="70" y="650" class="attribute">status - ENUM</text>
+  <text x="70" y="670" class="attribute">imdb_id - VARCHAR(20)</text>
+  <text x="70" y="690" class="attribute">tmdb_id - VARCHAR(20)</text>
+  <text x="70" y="710" class="attribute">source_type - ENUM</text>
+  <text x="70" y="730" class="attribute">source_url - VARCHAR(500)</text>
+  <text x="70" y="750" class="attribute fk">server_id (FK) - UUID</text>
+  <text x="70" y="770" class="attribute">storage_path - VARCHAR(500)</text>
+  <text x="70" y="790" class="attribute fk">category_id (FK) - UUID</text>
+  <text x="70" y="810" class="attribute fk">sub_category_id (FK) - UUID</text>
+  <text x="70" y="830" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="70" y="850" class="attribute">quality - ENUM</text>
+  <text x="70" y="870" class="attribute">resolution - ENUM</text>
+  <text x="70" y="890" class="attribute">added_at - TIMESTAMP</text>
+  <text x="70" y="910" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="70" y="930" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="70" y="950" class="attribute">all_time_views - INT</text>
+  
+  <!-- Series Entity -->
+  <rect x="350" y="400" width="220" height="280" class="entity-box"/>
+  <text x="460" y="425" class="entity-title">series</text>
+  <text x="370" y="450" class="attribute pk">id (PK) - UUID</text>
+  <text x="370" y="470" class="attribute">original_name - VARCHAR(255)</text>
+  <text x="370" y="490" class="attribute">show_app_name - VARCHAR(255)</text>
+  <text x="370" y="510" class="attribute">description - TEXT</text>
+  <text x="370" y="530" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="370" y="550" class="attribute">genres - TEXT</text>
+  <text x="370" y="570" class="attribute">cast - TEXT</text>
+  <text x="370" y="590" class="attribute">director - VARCHAR(255)</text>
+  <text x="370" y="610" class="attribute">release_date - DATE</text>
+  <text x="370" y="630" class="attribute">language - VARCHAR(100)</text>
+  <text x="370" y="650" class="attribute">status - ENUM</text>
+  <text x="370" y="670" class="attribute">imdb_id - VARCHAR(20)</text>
+  <text x="370" y="690" class="attribute">tmdb_id - VARCHAR(20)</text>
+  <text x="370" y="710" class="attribute">source_type - ENUM</text>
+  <text x="370" y="730" class="attribute">source_url - VARCHAR(500)</text>
+  <text x="370" y="750" class="attribute fk">server_id (FK) - UUID</text>
+  <text x="370" y="770" class="attribute">storage_path - VARCHAR(500)</text>
+  <text x="370" y="790" class="attribute fk">category_id (FK) - UUID</text>
+  <text x="370" y="810" class="attribute fk">sub_category_id (FK) - UUID</text>
+  <text x="370" y="830" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="370" y="850" class="attribute">quality - ENUM</text>
+  <text x="370" y="870" class="attribute">resolution - ENUM</text>
+  <text x="370" y="890" class="attribute">added_at - TIMESTAMP</text>
+  <text x="370" y="910" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="370" y="930" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="370" y="950" class="attribute">all_time_views - INT</text>
+  
+  <!-- Seasons Entity -->
+  <rect x="650" y="400" width="220" height="200" class="entity-box"/>
+  <text x="760" y="425" class="entity-title">seasons</text>
+  <text x="670" y="450" class="attribute pk">id (PK) - UUID</text>
+  <text x="670" y="470" class="attribute">season_number - INT</text>
+  <text x="670" y="490" class="attribute">name - VARCHAR(255)</text>
+  <text x="670" y="510" class="attribute">description - TEXT</text>
+  <text x="670" y="530" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="670" y="550" class="attribute">status - ENUM</text>
+  <text x="670" y="570" class="attribute fk">series_id (FK) - UUID</text>
+  <text x="670" y="590" class="attribute">created_at - TIMESTAMP</text>
+  <text x="670" y="610" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="670" y="630" class="attribute">deleted_at - TIMESTAMP</text>
+  
+  <!-- Episodes Entity -->
+  <rect x="950" y="400" width="220" height="200" class="entity-box"/>
+  <text x="1060" y="425" class="entity-title">episodes</text>
+  <text x="970" y="450" class="attribute pk">id (PK) - UUID</text>
+  <text x="970" y="470" class="attribute">episode_number - INT</text>
+  <text x="970" y="490" class="attribute">title - VARCHAR(255)</text>
+  <text x="970" y="510" class="attribute">description - TEXT</text>
+  <text x="970" y="530" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="970" y="550" class="attribute">status - ENUM</text>
+  <text x="970" y="570" class="attribute">source_type - ENUM</text>
+  <text x="970" y="590" class="attribute">source_url - VARCHAR(500)</text>
+  <text x="970" y="610" class="attribute">storage_path - VARCHAR(500)</text>
+  <text x="970" y="630" class="attribute fk">season_id (FK) - UUID</text>
+  <text x="970" y="650" class="attribute">quality - ENUM</text>
+  <text x="970" y="670" class="attribute">resolution - ENUM</text>
+  <text x="970" y="690" class="attribute">duration - INT</text>
+  <text x="970" y="710" class="attribute">created_at - TIMESTAMP</text>
+  <text x="970" y="730" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="970" y="750" class="attribute">deleted_at - TIMESTAMP</text>
+  
+  <!-- Dramas Entity -->
+  <rect x="1250" y="400" width="220" height="280" class="entity-box"/>
+  <text x="1360" y="425" class="entity-title">dramas</text>
+  <text x="1270" y="450" class="attribute pk">id (PK) - UUID</text>
+  <text x="1270" y="470" class="attribute">original_name - VARCHAR(255)</text>
+  <text x="1270" y="490" class="attribute">show_app_name - VARCHAR(255)</text>
+  <text x="1270" y="510" class="attribute">description - TEXT</text>
+  <text x="1270" y="530" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="1270" y="550" class="attribute">genres - TEXT</text>
+  <text x="1270" y="570" class="attribute">cast - TEXT</text>
+  <text x="1270" y="590" class="attribute">director - VARCHAR(255)</text>
+  <text x="1270" y="610" class="attribute">release_date - DATE</text>
+  <text x="1270" y="630" class="attribute">language - VARCHAR(100)</text>
+  <text x="1270" y="650" class="attribute">status - ENUM</text>
+  <text x="1270" y="670" class="attribute">imdb_id - VARCHAR(20)</text>
+  <text x="1270" y="690" class="attribute">tmdb_id - VARCHAR(20)</text>
+  <text x="1270" y="710" class="attribute">source_type - ENUM</text>
+  <text x="1270" y="730" class="attribute">source_url - VARCHAR(500)</text>
+  <text x="1270" y="750" class="attribute fk">server_id (FK) - UUID</text>
+  <text x="1270" y="770" class="attribute">storage_path - VARCHAR(500)</text>
+  <text x="1270" y="790" class="attribute fk">category_id (FK) - UUID</text>
+  <text x="1270" y="810" class="attribute fk">sub_category_id (FK) - UUID</text>
+  <text x="1270" y="830" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="1270" y="850" class="attribute">quality - ENUM</text>
+  <text x="1270" y="870" class="attribute">resolution - ENUM</text>
+  <text x="1270" y="890" class="attribute">added_at - TIMESTAMP</text>
+  <text x="1270" y="910" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="1270" y="930" class="attribute">deleted_at - TIMESTAMP</text>
+  <text x="1270" y="950" class="attribute">all_time_views - INT</text>
+  
+  <!-- Drama Episodes Entity -->
+  <rect x="1550" y="400" width="220" height="200" class="entity-box"/>
+  <text x="1660" y="425" class="entity-title">drama_episodes</text>
+  <text x="1570" y="450" class="attribute pk">id (PK) - UUID</text>
+  <text x="1570" y="470" class="attribute">episode_number - INT</text>
+  <text x="1570" y="490" class="attribute">title - VARCHAR(255)</text>
+  <text x="1570" y="510" class="attribute">description - TEXT</text>
+  <text x="1570" y="530" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="1570" y="550" class="attribute">status - ENUM</text>
+  <text x="1570" y="570" class="attribute">source_type - ENUM</text>
+  <text x="1570" y="590" class="attribute">source_url - VARCHAR(500)</text>
+  <text x="1570" y="610" class="attribute">storage_path - VARCHAR(500)</text>
+  <text x="1570" y="630" class="attribute fk">drama_id (FK) - UUID</text>
+  <text x="1570" y="650" class="attribute">quality - ENUM</text>
+  <text x="1570" y="670" class="attribute">resolution - ENUM</text>
+  <text x="1570" y="690" class="attribute">duration - INT</text>
+  <text x="1570" y="710" class="attribute">created_at - TIMESTAMP</text>
+  <text x="1570" y="730" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="1570" y="750" class="attribute">deleted_at - TIMESTAMP</text>
+  
+  <!-- Section 4: Live Content -->
+  <text x="1100" y="720" class="section-title">Live Content</text>
+  
+  <!-- Streams Entity -->
+  <rect x="950" y="740" width="220" height="280" class="entity-box"/>
+  <text x="1060" y="765" class="entity-title">streams</text>
+  <text x="970" y="790" class="attribute pk">id (PK) - UUID</text>
+  <text x="970" y="810" class="attribute">original_name - VARCHAR(255)</text>
+  <text x="970" y="830" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="970" y="850" class="attribute fk">bouquet_id (FK) - UUID</text>
+  <text x="970" y="870" class="attribute">icon_url - VARCHAR(500)</text>
+  <text x="970" y="890" class="attribute">url - VARCHAR(500)</text>
+  <text x="970" y="910" class="attribute">p2p_enabled - BOOLEAN</text>
+  <text x="970" y="930" class="attribute">timeshift_enabled - BOOLEAN</text>
+  <text x="970" y="950" class="attribute">timeshift_url - VARCHAR(500)</text>
+  <text x="970" y="970" class="attribute fk">epg_source_id (FK) - UUID</text>
+  <text x="970" y="990" class="attribute">channel_id - VARCHAR(100)</text>
+  <text x="970" y="1010" class="attribute">epg_lang - VARCHAR(10)</text>
+  <text x="970" y="1030" class="attribute">quality - ENUM</text>
+  <text x="970" y="1050" class="attribute">resolution - ENUM</text>
+  <text x="970" y="1070" class="attribute">status - ENUM</text>
+  <text x="970" y="1090" class="attribute">created_at - TIMESTAMP</text>
+  <text x="970" y="1110" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="970" y="1130" class="attribute">deleted_at - TIMESTAMP</text>
+  
+  <!-- Radios Entity -->
+  <rect x="1250" y="740" width="220" height="280" class="entity-box"/>
+  <text x="1360" y="765" class="entity-title">radios</text>
+  <text x="1270" y="790" class="attribute pk">id (PK) - UUID</text>
+  <text x="1270" y="810" class="attribute">original_name - VARCHAR(255)</text>
+  <text x="1270" y="830" class="attribute">show_app_name - VARCHAR(255)</text>
+  <text x="1270" y="850" class="attribute">description - TEXT</text>
+  <text x="1270" y="870" class="attribute">cover_url - VARCHAR(500)</text>
+  <text x="1270" y="890" class="attribute">genres - TEXT</text>
+  <text x="1270" y="910" class="attribute">language - VARCHAR(100)</text>
+  <text x="1270" y="930" class="attribute">country - VARCHAR(100)</text>
+  <text x="1270" y="950" class="attribute">status - ENUM</text>
+  <text x="1270" y="970" class="attribute">source_type - ENUM</text>
+  <text x="1270" y="990" class="attribute">source_url - VARCHAR(500)</text>
+  <text x="1270" y="1010" class="attribute fk">server_id (FK) - UUID</text>
+  <text x="1270" y="1030" class="attribute">storage_path - VARCHAR(500)</text>
+  <text x="1270" y="1050" class="attribute fk">category_id (FK) - UUID</text>
+  <text x="1270" y="1070" class="attribute fk">sub_category_id (FK) - UUID</text>
+  <text x="1270" y="1090" class="attribute fk">application_id (FK) - UUID</text>
+  <text x="1270" y="1110" class="attribute">quality - ENUM</text>
+  <text x="1270" y="1130" class="attribute">added_at - TIMESTAMP</text>
+  <text x="1270" y="1150" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="1270" y="1170" class="attribute">deleted_at - TIMESTAMP</text>
+  
+  <!-- Section 5: Infrastructure -->
+  <text x="300" y="720" class="section-title">Infrastructure</text>
+  
+  <!-- Bouquets Entity -->
+  <rect x="50" y="740" width="220" height="200" class="entity-box"/>
+  <text x="160" y="765" class="entity-title">bouquets</text>
+  <text x="70" y="790" class="attribute pk">id (PK) - UUID</text>
+  <text x="70" y="810" class="attribute">name - VARCHAR(255) (UNIQUE)</text>
+  <text x="70" y="830" class="attribute">region - ENUM</text>
+  <text x="70" y="850" class="attribute">description - TEXT</text>
+  <text x="70" y="870" class="attribute">status - ENUM</text>
+  <text x="70" y="890" class="attribute">created_at - TIMESTAMP</text>
+  <text x="70" y="910" class="attribute">updated_at - TIMESTAMP</text>
+  <text x="70" y="930" class="attribute">deleted_at - TIMESTAMP</text>
+  
+  <!-- Servers Entity -->
+  <rect x="350" y="740" width="220" height="200" class="entity-box"/>
+  <text x="460" y="765" class="entity-title">servers</text>
+  <text x="370" y="790" class="attribute pk">id (PK) - UUID</text>
+  <text x="370" y="810" class="attribute">name - VARCHAR(255)</text>
+  <text x="370" y="830" class="attribute">host - VARCHAR(255)</text>
+  <text x="370" y="850" class="attribute">port - INT</text>
+  <text x="370" y="870" class="attribute">status - ENUM</text>
+  <text x="370" y="890" class="attribute">description - TEXT</text>
+  <text x="370" y="910" class="attribute">created_at - TIMESTAMP</text>
+  <text x="370" y="930" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- EPG Sources Entity -->
+  <rect x="650" y="740" width="220" height="200" class="entity-box"/>
+  <text x="760" y="765" class="entity-title">epg_sources</text>
+  <text x="670" y="790" class="attribute pk">id (PK) - UUID</text>
+  <text x="670" y="810" class="attribute">name - VARCHAR(255)</text>
+  <text x="670" y="830" class="attribute">provider_code - VARCHAR(100)</text>
+  <text x="670" y="850" class="attribute">url - VARCHAR(500)</text>
+  <text x="670" y="870" class="attribute">created_at - TIMESTAMP</text>
+  <text x="670" y="890" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Section 6: System -->
+  <text x="1100" y="1060" class="section-title">System</text>
+  
+  <!-- Admin Config Entity -->
+  <rect x="950" y="1080" width="220" height="200" class="entity-box"/>
+  <text x="1060" y="1105" class="entity-title">admin_config</text>
+  <text x="970" y="1130" class="attribute pk">id (PK) - UUID</text>
+  <text x="970" y="1150" class="attribute">key - VARCHAR(255)</text>
+  <text x="970" y="1170" class="attribute">value - TEXT</text>
+  <text x="970" y="1190" class="attribute">description - TEXT</text>
+  <text x="970" y="1210" class="attribute">created_at - TIMESTAMP</text>
+  <text x="970" y="1230" class="attribute">updated_at - TIMESTAMP</text>
+  
+  <!-- Bouquet Merge Log Entity -->
+  <rect x="1250" y="1080" width="220" height="200" class="entity-box"/>
+  <text x="1360" y="1105" class="entity-title">bouquet_merge_log</text>
+  <text x="1270" y="1130" class="attribute pk">id (PK) - UUID</text>
+  <text x="1270" y="1150" class="attribute">source_bouquet_id - UUID</text>
+  <text x="1270" y="1170" class="attribute">target_bouquet_id - UUID</text>
+  <text x="1270" y="1190" class="attribute">merge_date - TIMESTAMP</text>
+  <text x="1270" y="1210" class="attribute">status - VARCHAR(50)</text>
+  <text x="1270" y="1230" class="attribute">created_at - TIMESTAMP</text>
+  
+  <!-- Key Relationships -->
+  
+  <!-- User Management Relationships -->
+  <line x1="270" y1="200" x2="650" y2="200" class="relationship-line"/>
+  <text x="460" y="195" class="relationship-label">1:N</text>
+  
+  <line x1="570" y1="200" x2="650" y2="200" class="relationship-line"/>
+  <text x="610" y="195" class="relationship-label">1:N</text>
+  
+  <!-- Content Organization Relationships -->
+  <line x1="1060" y1="300" x2="1360" y2="300" class="relationship-line"/>
+  <text x="1210" y="295" class="relationship-label">1:N</text>
+  
+  <line x1="1150" y1="300" x2="1550" y2="300" class="relationship-line"/>
+  <text x="1350" y="295" class="relationship-label">1:N</text>
+  
+  <line x1="1060" y1="300" x2="1550" y2="300" class="relationship-line"/>
+  <text x="1305" y="295" class="relationship-label">1:N</text>
+  
+  <!-- Video Content Relationships -->
+  <line x1="460" y1="540" x2="760" y2="540" class="relationship-line"/>
+  <text x="610" y="535" class="relationship-label">1:N</text>
+  
+  <line x1="760" y1="540" x2="1060" y2="540" class="relationship-line"/>
+  <text x="910" y="535" class="relationship-label">1:N</text>
+  
+  <line x1="1360" y1="540" x2="1660" y2="540" class="relationship-line"/>
+  <text x="1510" y="535" class="relationship-label">1:N</text>
+  
+  <!-- Content to Categories (Simplified) -->
+  <line x1="160" y1="680" x2="1060" y2="380" class="relationship-line"/>
+  <text x="610" y="530" class="relationship-label">1:N</text>
+  
+  <line x1="460" y1="680" x2="1060" y2="380" class="relationship-line"/>
+  <text x="760" y="530" class="relationship-label">1:N</text>
+  
+  <line x1="1360" y1="680" x2="1060" y2="380" class="relationship-line"/>
+  <text x="1210" y="530" class="relationship-label">1:N</text>
+  
+  <!-- Content to Applications (Simplified) -->
+  <line x1="160" y1="680" x2="460" y2="300" class="relationship-line"/>
+  <text x="310" y="490" class="relationship-label">1:N</text>
+  
+  <line x1="460" y1="680" x2="460" y2="300" class="relationship-line"/>
+  <text x="465" y="490" class="relationship-label">1:N</text>
+  
+  <line x1="1360" y1="680" x2="460" y2="300" class="relationship-line"/>
+  <text x="910" y="490" class="relationship-label">1:N</text>
+  
+  <!-- Live Content to Applications -->
+  <line x1="1060" y1="880" x2="460" y2="300" class="relationship-line"/>
+  <text x="760" y="590" class="relationship-label">1:N</text>
+  
+  <line x1="1360" y1="880" x2="460" y2="300" class="relationship-line"/>
+  <text x="910" y="590" class="relationship-label">1:N</text>
+  
+  <!-- Many-to-Many Relationships (Simplified) -->
+  <line x1="270" y1="680" x2="160" y2="940" class="relationship-line many-to-many"/>
+  <text x="215" y="810" class="relationship-label">M:N</text>
+  
+  <line x1="570" y1="680" x2="160" y2="940" class="relationship-line many-to-many"/>
+  <text x="365" y="810" class="relationship-label">M:N</text>
+  
+  <line x1="1470" y1="680" x2="160" y2="940" class="relationship-line many-to-many"/>
+  <text x="815" y="810" class="relationship-label">M:N</text>
+  
+  <line x1="1170" y1="880" x2="160" y2="940" class="relationship-line many-to-many"/>
+  <text x="665" y="910" class="relationship-label">M:N</text>
+  
+  <line x1="1470" y1="880" x2="160" y2="940" class="relationship-line many-to-many"/>
+  <text x="815" y="910" class="relationship-label">M:N</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="1300" width="400" height="200" fill="white" stroke="#dee2e6" stroke-width="2" rx="10"/>
+  <text x="250" y="1330" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#212529">Legend</text>
+  
+  <text x="80" y="1365" class="attribute pk">Primary Key</text>
+  <text x="80" y="1390" class="attribute fk">Foreign Key</text>
+  <text x="80" y="1415" class="attribute">Regular Attribute</text>
+  
+  <line x1="80" y1="1440" x2="140" y2="1440" class="relationship-line"/>
+  <text x="160" y="1445" class="relationship-label">One-to-Many (1:N)</text>
+  
+  <line x1="80" y1="1470" x2="140" y2="1470" class="relationship-line many-to-many"/>
+  <text x="160" y="1475" class="relationship-label">Many-to-Many (M:N)</text>
+  
+  <!-- Database Statistics -->
+  <rect x="500" y="1300" width="400" height="200" fill="white" stroke="#dee2e6" stroke-width="2" rx="10"/>
+  <text x="700" y="1330" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#212529">Database Summary</text>
+  
+  <text x="530" y="1365" class="attribute">Total Entities: 19</text>
+  <text x="530" y="1390" class="attribute">Core Tables: 6</text>
+  <text x="530" y="1415" class="attribute">Content Tables: 8</text>
+  <text x="530" y="1440" class="attribute">Infrastructure: 3</text>
+  <text x="530" y="1465" class="attribute">System Tables: 2</text>
+  
+  <!-- Notes -->
+  <rect x="950" y="1300" width="400" height="200" fill="white" stroke="#dee2e6" stroke-width="2" rx="10"/>
+  <text x="1150" y="1330" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#212529">Key Features</text>
+  
+  <text x="980" y="1365" class="attribute">• Multi-tenant architecture</text>
+  <text x="980" y="1390" class="attribute">• Content categorization system</text>
+  <text x="980" y="1415" class="attribute">• Bouquet-based packaging</text>
+  <text x="980" y="1440" class="attribute">• EPG integration support</text>
+  <text x="980" y="1465" class="attribute">• Server infrastructure management</text>
+</svg>

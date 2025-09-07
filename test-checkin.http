@@ -1,0 +1,28 @@
+### Test Checkin Endpoint
+
+POST http://localhost:3000/auths/checkin
+Content-Type: application/json
+
+{
+  "authorization": "Bearer eyJraWQiOiJGS081cyttWkVGUkhVZWk2bUp5UmJ1K1c2WWZaK0RhQjE0dTFMUzJtdTg0PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiIxMmNkN2I0OS0zOTJkLTQwMWEtYTI5MC1hZTQyYzNkYjEzZDQiLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV8zSXExQ2lzbjEiLCJjbGllbnRfaWQiOiIzbXFxYWxwdjZoYmY5ZmlnN3BsamRrMnMyMyIsIm9yaWdpbl9qdGkiOiI0MWYxMWI3Zi1lM2I4LTQ0NjUtODkwMC00YTk3ZTBjMTkxYmMiLCJldmVudF9pZCI6ImY5OThmODkzLTk0ZTYtNGQwNi05ZGU0LTZlNWEyOGUzNjY4ZCIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE3NTEwMjE1ODMsImV4cCI6MTc1MTEwNzk4MywiaWF0IjoxNzUxMDIxNTgzLCJqdGkiOiJkNDcwZGVhOC01ZDg4LTQzOWItOTE3My1kNWM3YTcwMWQxODciLCJ1c2VybmFtZSI6IjEyY2Q3YjQ5LTM5MmQtNDAxYS1hMjkwLWFlNDJjM2RiMTNkNCJ9.iU0oA4k6-wQaIu8m51-xU1j1ypIHPV3V1FRiZKfbdx0OVVkSOqrr3Utd4Fn2KcLHgbxeVGYw4mp7mrypLXDFMlGjHzrvbhgIUkboMlVdKepHtxcfAwMIUcSBBVtxTgWMoXGUfsr1miqVnOyxSxPBG11WdMZ6AdCpxCJg8rWa8xYzFKVJk2W8e_4av1QL1tdz_QWmm22hd0MrmGP7OcpPSH6UK1r0rBhU7GFSIOJthKltLa2K-dxBG2uzh4yCkg3LbxAugy0GigR0Ji56kCRd4KnCy8wtKyTfJ3Zxt0F6wt6P3I_908_Ew7AHTGZv6ijZV6jw37amB4_9wUKKXOCtxA",
+  "url": "https://vakotrade-demo.cryptosrvc.com/graphql"
+}
+
+### Test Checkin with Custom URL
+
+POST http://localhost:3000/auths/checkin
+Content-Type: application/json
+
+{
+  "authorization": "Bearer your-token-here",
+  "url": "https://custom-endpoint.com/graphql"
+}
+
+### Test Checkin with Default URL (URL is optional)
+
+POST http://localhost:3000/auths/checkin
+Content-Type: application/json
+
+{
+  "authorization": "Bearer your-token-here"
+} 

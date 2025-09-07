@@ -1,0 +1,278 @@
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  DeleteDateColumn,
+  ManyToOne,
+  JoinColumn,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from "typeorm";
+import { ApiProperty } from "@nestjs/swagger";
+import { Application } from "./application.entity";
+import { Bouquet } from "./bouquet.entity";
+import { Category } from "./category.entity";
+import { SubCategory } from "./sub-category.entity";
+import { Server } from "./server.entity";
+import { Season } from "./season.entity";
+
+export enum SeriesStatus {
+  ENABLED = "enabled",
+  DISABLED = "disabled",
+}
+
+export enum SeriesSourceType {
+  URL = "url",
+  STORAGE = "storage",
+}
+
+export enum SeriesQuality {
+  SD = "SD",
+  HD = "HD",
+  FHD = "FHD",
+  UHD = "UHD",
+}
+
+export enum SeriesResolution {
+  "480p" = "480p",
+  "720p" = "720p",
+  "1080p" = "1080p",
+  "4K" = "4K",
+}
+
+@Entity("series")
+export class Series {
+  @ApiProperty({ description: "Unique identifier for the series" })
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
+
+  @ApiProperty({
+    description: "Original name of the series",
+    example: "Breaking Bad",
+  })
+  @Column({ name: "original_name", type: "varchar", length: 255 })
+  original_name: string;
+
+  @ApiProperty({
+    description: "Name to show in applications",
+    example: "Breaking Bad (2008)",
+  })
+  @Column({ name: "show_app_name", type: "varchar", length: 255 })
+  show_app_name: string;
+
+  @ApiProperty({ description: "Description of the series", required: false })
+  @Column({ name: "description", type: "text", nullable: true })
+  description?: string;
+
+  @ApiProperty({
+    description: "Cover URL for the series",
+    example: "https://example.com/cover.jpg",
+    required: false,
+  })
+  @Column({ name: "cover_url", type: "varchar", length: 500, nullable: true })
+  cover_url?: string;
+
+  @ApiProperty({
+    description: "Genres of the series",
+    example: "Crime, Drama",
+    required: false,
+  })
+  @Column({ name: "genres", type: "text", nullable: true })
+  genres?: string;
+
+  @ApiProperty({
+    description: "Cast of the series",
+    example: "Bryan Cranston, Aaron Paul",
+    required: false,
+  })
+  @Column({ name: "cast", type: "text", nullable: true })
+  cast?: string;
+
+  @ApiProperty({
+    description: "Director of the series",
+    example: "Vince Gilligan",
+    required: false,
+  })
+  @Column({ name: "director", type: "varchar", length: 255, nullable: true })
+  director?: string;
+
+  @ApiProperty({
+    description: "Release date of the series",
+    example: "2008-01-20",
+    required: false,
+  })
+  @Column({ name: "release_date", type: "date", nullable: true })
+  release_date?: Date;
+
+  @ApiProperty({
+    description: "Language of the series",
+    example: "English",
+    required: false,
+  })
+  @Column({ name: "language", type: "varchar", length: 100, nullable: true })
+  language?: string;
+
+  @ApiProperty({
+    description: "Status of the series",
+    enum: SeriesStatus,
+    example: SeriesStatus.ENABLED,
+  })
+  @Column({
+    name: "status",
+    type: "enum",
+    enum: SeriesStatus,
+    default: SeriesStatus.ENABLED,
+  })
+  status: SeriesStatus;
+
+  @ApiProperty({
+    description: "IMDB ID of the series",
+    example: "tt0903747",
+    required: false,
+  })
+  @Column({
+    name: "imdb_id",
+    type: "varchar",
+    length: 20,
+    nullable: true,
+    unique: true,
+  })
+  imdb_id?: string;
+
+  @ApiProperty({
+    description: "TMDB ID of the series",
+    example: "1396",
+    required: false,
+  })
+  @Column({
+    name: "tmdb_id",
+    type: "varchar",
+    length: 20,
+    nullable: true,
+    unique: true,
+  })
+  tmdb_id?: string;
+
+  @ApiProperty({
+    description: "Source type of the series",
+    enum: SeriesSourceType,
+    example: SeriesSourceType.URL,
+  })
+  @Column({
+    name: "source_type",
+    type: "enum",
+    enum: SeriesSourceType,
+    default: SeriesSourceType.URL,
+  })
+  source_type: SeriesSourceType;
+
+  @ApiProperty({
+    description: "Source URL for the series",
+    example: "https://example.com/series",
+    required: false,
+  })
+  @Column({ name: "source_url", type: "varchar", length: 500, nullable: true })
+  source_url?: string;
+
+  @ApiProperty({ description: "Server ID for storage", required: false })
+  @Column({ name: "server_id", type: "uuid", nullable: true })
+  server_id?: string;
+
+  @ApiProperty({
+    description: "Storage path for the series",
+    example: "/series/breaking-bad",
+    required: false,
+  })
+  @Column({
+    name: "storage_path",
+    type: "varchar",
+    length: 500,
+    nullable: true,
+  })
+  storage_path?: string;
+
+  @ApiProperty({ description: "Category ID", required: false })
+  @Column({ name: "category_id", type: "uuid", nullable: true })
+  category_id?: string;
+
+  @ApiProperty({ description: "Sub-category ID", required: false })
+  @Column({ name: "sub_category_id", type: "uuid", nullable: true })
+  sub_category_id?: string;
+
+  @ApiProperty({ description: "Application ID", required: false })
+  @Column({ name: "application_id", type: "uuid", nullable: true })
+  application_id?: string;
+
+  @ApiProperty({
+    description: "Series quality",
+    enum: SeriesQuality,
+    example: SeriesQuality.HD,
+  })
+  @Column({
+    name: "quality",
+    type: "enum",
+    enum: SeriesQuality,
+    default: SeriesQuality.HD,
+  })
+  quality: SeriesQuality;
+
+  @ApiProperty({
+    description: "Series resolution",
+    enum: SeriesResolution,
+    example: SeriesResolution["1080p"],
+  })
+  @Column({
+    name: "resolution",
+    type: "enum",
+    enum: SeriesResolution,
+    default: SeriesResolution["1080p"],
+  })
+  resolution: SeriesResolution;
+
+  @ApiProperty({ description: "Creation timestamp" })
+  @CreateDateColumn({ name: "added_at" })
+  added_at: Date;
+
+  @ApiProperty({ description: "Last update timestamp" })
+  @UpdateDateColumn({ name: "updated_at" })
+  updated_at: Date;
+
+  @ApiProperty({ description: "Soft delete timestamp", required: false })
+  @DeleteDateColumn({ name: "deleted_at" })
+  deleted_at?: Date;
+
+  @ApiProperty({ description: "All-time views count", example: 2500 })
+  @Column({ name: "all_time_views", type: "int", default: 0 })
+  all_time_views: number;
+
+  // Relationships
+  @ManyToOne(() => Application, { onDelete: "SET NULL" })
+  @JoinColumn({ name: "application_id" })
+  application?: Application;
+
+  @ManyToOne(() => Category, { onDelete: "SET NULL" })
+  @JoinColumn({ name: "category_id" })
+  category?: Category;
+
+  @ManyToOne(() => SubCategory, { onDelete: "SET NULL" })
+  @JoinColumn({ name: "sub_category_id" })
+  sub_category?: SubCategory;
+
+  @ManyToOne(() => Server, { onDelete: "SET NULL" })
+  @JoinColumn({ name: "server_id" })
+  server?: Server;
+
+  @OneToMany(() => Season, (season) => season.series, { cascade: true })
+  seasons: Season[];
+
+  @ManyToMany(() => Bouquet)
+  @JoinTable({
+    name: "series_bouquets",
+    joinColumn: { name: "series_id", referencedColumnName: "id" },
+    inverseJoinColumn: { name: "bouquet_id", referencedColumnName: "id" },
+  })
+  bouquets: Bouquet[];
+}
