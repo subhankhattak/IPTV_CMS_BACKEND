@@ -34,6 +34,7 @@ export class EpgSource {
   @ApiProperty({ description: "Creation timestamp" })
   @CreateDateColumn({
     name: "created_at",
+    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
   })
   created_at: Date;
@@ -41,6 +42,7 @@ export class EpgSource {
   @ApiProperty({ description: "Last update timestamp" })
   @UpdateDateColumn({
     name: "updated_at",
+    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
     onUpdate: "CURRENT_TIMESTAMP",
   })
