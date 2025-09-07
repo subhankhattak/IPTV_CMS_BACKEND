@@ -233,7 +233,6 @@ export class Movie {
   @ApiProperty({ description: "Creation timestamp" })
   @CreateDateColumn({
     name: "added_at",
-    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
   })
   added_at: Date;
@@ -241,7 +240,6 @@ export class Movie {
   @ApiProperty({ description: "Last update timestamp" })
   @UpdateDateColumn({
     name: "updated_at",
-    type: "timestamp",
     default: () => "CURRENT_TIMESTAMP",
     onUpdate: "CURRENT_TIMESTAMP",
   })
