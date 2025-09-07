@@ -59,6 +59,10 @@ async function bootstrap() {
       `http://127.0.0.1:${process.env.PORT}`,
       "Local Environment (127.0.0.1)"
     )
+    .addServer(
+      `http://128.199.60.154:${process.env.PORT}`,
+      "Production Server (128.199.60.154)"
+    )
     .setVersion("1.0")
     .build();
 
